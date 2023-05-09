@@ -1,46 +1,77 @@
 {
   "name": "will",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/will",
+  "sourceRoot": "apps/will/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/next:build",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/will",
-        "outputPath": "dist/apps/will"
+        "compiler": "babel",
+        "outputPath": "dist/apps/will",
+        "index": "apps/will/src/index.html",
+        "baseHref": "/",
+        "main": "apps/will/src/main.tsx",
+        "tsConfig": "apps/will/tsconfig.app.json",
+        "assets": ["apps/will/src/favicon.ico", "apps/will/src/assets"],
+        "styles": ["apps/will/src/styles.css"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/will/webpack.config.js"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/will"
-        },
-        "production": {}
-      }
-    },
-    "serve": {
-      "executor": "@nx/next:server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "will:build",
-        "dev": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "will:build:development",
-          "dev": true
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         },
         "production": {
-          "buildTarget": "will:build:production",
-          "dev": false
+          "fileReplacements": [
+            {
+              "replace": "apps/will/src/environments/environment.ts",
+              "with": "apps/will/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
         }
       }
     },
-    "export": {
-      "executor": "@nx/next:export",
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "will:build:production"
+        "buildTarget": "will:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "will:build:development"
+        },
+        "production": {
+          "buildTarget": "will:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/will/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "will:build"
       }
     },
     "test": {
@@ -55,13 +86,6 @@
           "ci": true,
           "codeCoverage": true
         }
-      }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/will/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
