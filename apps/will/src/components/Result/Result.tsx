@@ -19,11 +19,8 @@ Some countries are recommending vaccination for persons at risk. Many years of r
 
       <div className='bg-info mt-5'>
           <Image src="../../assets/OCIFP90.jpg" fluid />
-        {/* <img src="../../assets/OCIFP90.jpg" className="img-fluid" /> */}
       </div>
     </div>
   )
 }
 // style={{height:'5%', backgroundColor:'red'}}
-
-
