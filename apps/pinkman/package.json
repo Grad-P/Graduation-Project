@@ -2,12 +2,24 @@
   "name": "pinkman",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "clean-xcode-cache": "rm -rf ~/Library/Developer/Xcode/DerivedData/*",
+    "clean-run-ios": "rm -rf ~/Library/Developer/Xcode/DerivedData/* && npx nx run pinkman:run-ios"
+  },
   "dependencies": {
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
     "react": "*",
     "react-native": "*",
     "react-native-svg": "*",
-    "metro-config": "*"
+    "metro-config": "*",
+    "@react-navigation/native": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
+    "@react-navigation/bottom-tabs": "*",
+    "@react-navigation/native-stack": "*",
+    "react-native-paper": "*",
+    "react-native-vector-icons": "*",
+    "lottie-react-native": "*"
   }
 }
