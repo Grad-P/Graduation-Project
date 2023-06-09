@@ -37,6 +37,7 @@ export class AppController {
   async predict(@UploadedFile() image: Express.Multer.File): Promise<any> {
     const imageBuffer = fs.readFileSync(image.path);
     const result = await this.mlService.predict(imageBuffer);
-    return { result: result };
+    console.log('first', { result: (1 - result) * 100 });
+    return { result: (1 - result) * 100 };
   }
 }

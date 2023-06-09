@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
+import { store } from '@gp/redux';
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -8,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 import { SCREEN_NAMES } from '../common';
 import BottomTabNavigator from '../features/bottom-tab-navigator';
 
@@ -56,16 +58,16 @@ export const App = () => {
     </PaperProvider>
   );
 };
-// const AppWrapper = () => {
-//   return (
-//     <Provider store={store}>
-//       <App />
-//     </Provider>
-//   );
-// };
-// export default AppWrapper;
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+export default AppWrapper;
 
-export default App;
+// export default App;
 
 // const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
 // const scrollViewRef = useRef<null | ScrollView>(null);

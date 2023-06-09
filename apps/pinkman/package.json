@@ -23,6 +23,7 @@
     "lottie-react-native": "*",
     "@reduxjs/toolkit": "*",
     "axios": "*",
-    "react-redux": "*"
+    "react-redux": "*",
+    "react-native-image-picker": "*"
   }
 }

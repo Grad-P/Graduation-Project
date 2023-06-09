@@ -25,26 +25,21 @@ const initialState: PredictMonkeyPoxSliceState = {
 };
 
 export type predictMonkeyPoxResponse = {
-  statusCode: number;
-  message: string;
-  data: { diseased: boolean };
+  result: boolean;
 };
 
-const BACKEND_URL = 'http://localhost:3000/api';
+const BACKEND_URL = 'http://localhost:3000/api/';
 
 export const PredictMonkeyPox = createAsyncThunk(
   'predict/PredictMonkeyPox',
   async (form: FormData, { getState }) => {
-    return await axios.post(BACKEND_URL + '', form, {
+    const response = await axios.post(BACKEND_URL + 'predict-monkeypox', form, {
       headers: {
         Accept: 'application/json',
         'content-type': 'multipart/form-data',
       },
     });
-    // get<BannerReadDto[]>(
-    //   RESOURCE_TYPE.PRODUCT,
-    //   '/product/banners/active'
-    // );
+    return response.data;
   }
 );
 
@@ -66,15 +61,11 @@ export const PredictMonkeyPoxSlice = createSlice({
           state: PredictMonkeyPoxSliceState,
           action: PayloadAction<predictMonkeyPoxResponse>
         ) => {
-          if (
-            action.payload &&
-            action.payload.statusCode === HttpResponseCodesEnum.SUCCESS
-          ) {
-            state.diseased = action.payload.data.diseased;
+          if (action.payload) {
+            state.diseased = action.payload.result;
             state.predictMonkeyPoxSliceStatus = SliceStatus.SUCCEEDED;
           } else {
             state.predictMonkeyPoxSliceStatus = SliceStatus.FAILED;
-            state.error = action.payload.message;
           }
         }
       )
