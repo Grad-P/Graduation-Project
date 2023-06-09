@@ -1,75 +1,50 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import NxWelcome from './nx-welcome';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from '../components/Home/home';
+import NavBar from '../components/navBar/navBar';
 import Prediction from '../components/Prediction/Prediction';
+import Prevention from '../components/Prevention/prevention';
 import Result from '../components/Result/Result';
 import Symptoms from '../components/Symptoms/symptoms';
-import styles from './app.module.css';
+import './app.module.css';
+
+
 
 export function App() {
   return (
-
     <div>
-      <div className={styles.hedNav}>
-        <div className= 'styles.header px-5' >
-          <h1>Monkeypox Master</h1>
-        </div>
-        <nav className={styles.navbar}>
-          <div role="navigation" className='px-5' style={{ display:'flex', textDecoration: 'none' ,gap:20,justifyContent:'center',alignItems:'center',height:'100%'}} >
-                <Link style={{ textDecoration: 'none' }} to="/">home</Link>
-                <Link style={{ textDecoration: 'none' }} to="/prevention">prevention</Link>
-                <Link style={{ textDecoration: 'none' }} to="/symptoms">symptoms</Link>
-                <Link style={{ textDecoration: 'none' }} to="/predict">predict</Link>
-                <Link style={{ textDecoration: 'none' }} to="/result">treatment</Link>
+      <NavBar/>
 
-          </div>
-        </nav>
-      </div>
-
-      <Routes>
+    <Routes>
       <Route
-          path="/"
-          element={
-            <div>
-              <Home />
-              <Link to="/symptoms">Click here for symptoms.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/symptoms"
-          element={
-            <div>
-              <Symptoms />
-              <Link to="/symptoms">Click here for Predict.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/predict"
-          element={
-            <div>
-              <Prediction />
-              <Link to="/predict">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/result"
-          element={
-            <div>
-              <Result />
-              <Link to="/result">Click here to go back to predict page</Link>
-            </div>
-          }
-        />
-      </Routes>
+        path="/"
+        element={<div>
+          <Home />
+          <Prevention />
+        </div>} />
+      <Route
+        path="/symptoms"
+        element={<div>
+          <Symptoms />
+        </div>} />
+      <Route
+        path="/predict"
+        element={<div>
+          <Prediction />
+        </div>} />
+      <Route
+        path="/result"
+        element={<div>
+          <Result />
+        </div>} />
+    </Routes>
 
     </div>
+
   );
 
 }
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" ></script>
 export default App;
