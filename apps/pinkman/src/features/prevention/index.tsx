@@ -3,22 +3,22 @@ import { SafeAreaView, Text, View } from 'react-native';
 import PageHeader from '../../components/atoms/page-header';
 import Loader from '../../components/organisms/loader';
 
-const Prediction = ({ route, navigation }) => {
+const Prevention = ({ route, navigation }) => {
   const [loaderOpen, setLoaderOpen] = useState<boolean>(true);
 
   return (
     <>
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <PageHeader route={route} navigation={navigation} />
-        {!loaderOpen && (
+      {!loaderOpen && (
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
+          <PageHeader route={route} navigation={navigation} />
           <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-            <Text> Hello From Prediction </Text>
+            <Text> Hello From Prevention </Text>
           </SafeAreaView>
-        )}
-      </View>
+        </View>
+      )}
       <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} />
     </>
   );
 };
 
-export default Prediction;
+export default Prevention;

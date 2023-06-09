@@ -1,11 +1,11 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Text } from 'react-native';
 
-const ProbabilityScreen = ()=>{
-return (
-  <View>
-    <Text>Welcome From Symptoms Checker Probability Screen</Text>
-  </View>
-);
-}
+const ProbabilityScreen = () => {
+  return (
+    <SafeAreaView>
+      <Text>Welcome From Symptoms Checker Probability Screen</Text>
+    </SafeAreaView>
+  );
+};
 
 export default ProbabilityScreen;

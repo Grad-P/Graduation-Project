@@ -1,10 +1,10 @@
-import { Text, View } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 
 const QuestionsScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Welcome From Symptoms Checker Questions Screen</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

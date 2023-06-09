@@ -1,47 +1,48 @@
-import styles from './app.module.css';
-import Symptoms from '../components/Symptoms/symptoms'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import NxWelcome from './nx-welcome';
-
-import { Route, Routes, Link } from 'react-router-dom';
-import Result from '../components/Result/Result';
+import { Link, Route, Routes } from 'react-router-dom';
+import Home from '../components/Home/home';
 import Prediction from '../components/Prediction/Prediction';
+import Result from '../components/Result/Result';
+import Symptoms from '../components/Symptoms/symptoms';
+import styles from './app.module.css';
 
 export function App() {
-
   return (
+
     <div>
       <div className={styles.hedNav}>
-      <div className={styles.header}>
-        <h1>monkeypox checker</h1>
-      </div>
+        <div className= 'styles.header px-5' >
+          <h1>Monkeypox Master</h1>
+        </div>
         <nav className={styles.navbar}>
-      <div role="navigation" >
-        <ul style={{display:'flex', textDecoration:'none',  color: 'aqua' }} >
-          <li style={{paddingLeft:'4%', paddingRight:'3%'}} >
-            <Link style={{textDecoration:'none'}} to="/">Symptoms</Link>
-          </li>
-          <li style={{paddingLeft:'4%', paddingRight:'3%'}}>
-            <Link style={{textDecoration:'none'}} to="/predict">predict</Link>
-          </li>
-          <li style={{paddingLeft:'4%', paddingRight:'3%'}}>
-            <Link style={{textDecoration:'none'}} to="/result">result</Link>
-          </li>
-        </ul>
-      </div>
-      </nav>
+          <div role="navigation" className='px-5' style={{ display:'flex', textDecoration: 'none' ,gap:20,justifyContent:'center',alignItems:'center',height:'100%'}} >
+                <Link style={{ textDecoration: 'none' }} to="/">home</Link>
+                <Link style={{ textDecoration: 'none' }} to="/prevention">prevention</Link>
+                <Link style={{ textDecoration: 'none' }} to="/symptoms">symptoms</Link>
+                <Link style={{ textDecoration: 'none' }} to="/predict">predict</Link>
+                <Link style={{ textDecoration: 'none' }} to="/result">treatment</Link>
+
+          </div>
+        </nav>
       </div>
 
-      {/* <br />
-      <hr />
-      <br /> */}
       <Routes>
-        <Route
+      <Route
           path="/"
           element={
             <div>
-              <Symptoms/>
-              <Link to="/predict">Click here for Predict.</Link>
+              <Home />
+              <Link to="/symptoms">Click here for symptoms.</Link>
+            </div>
+          }
+        />
+        <Route
+          path="/symptoms"
+          element={
+            <div>
+              <Symptoms />
+              <Link to="/symptoms">Click here for Predict.</Link>
             </div>
           }
         />
@@ -49,17 +50,17 @@ export function App() {
           path="/predict"
           element={
             <div>
-              <Prediction/>
-              <Link to="/">Click here to go back to root page.</Link>
+              <Prediction />
+              <Link to="/predict">Click here to go back to root page.</Link>
             </div>
           }
         />
-            <Route
+        <Route
           path="/result"
           element={
             <div>
-              <Result/>
-              <Link to="/predict">Click here to go back to predict page</Link>
+              <Result />
+              <Link to="/result">Click here to go back to predict page</Link>
             </div>
           }
         />
@@ -67,17 +68,6 @@ export function App() {
 
     </div>
   );
-// function test(file:any) {
-//   if (file.files && file.files[0]) {
-//     const reader = new FileReader();
-
-//     reader.onload = function (e) {
-//       $('#blah').attr('src', e.target:FileReader.result).width(150).height(200);
-//     };
-
-//     reader.readAsDataURL(file.files[0]);
-//   }
-// }
 
 }
 

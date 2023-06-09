@@ -12,7 +12,7 @@ setImg(URL.createObjectURL(x.target.files[0]))
 }
 }
   return(
-<div className='prediction bg-secondary' style={{height:'100vh'}}>
+<div className='prediction' style={{height:'100vh'}}>
 
 <form>
 <input type="file" id="myFile" name="imagename text-info" accept='image/gif, image/jpeg, image/png' onChange={test} className='bg-secondary'/>

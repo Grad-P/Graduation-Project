@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -10,6 +13,13 @@ import BottomTabNavigator from '../features/bottom-tab-navigator';
 
 export const App = () => {
   const Stack = createNativeStackNavigator();
+  const navigationRef = useNavigationContainerRef();
+
+  const routeNameRef = useRef(null);
+  const [routeName, setRouteName] = useState(SCREEN_NAMES.HOME);
+  useEffect(() => {
+    return;
+  }, [routeName]);
   return (
     <PaperProvider>
       <SafeAreaProvider>
@@ -18,8 +28,17 @@ export const App = () => {
           translucent
           showHideTransition={'fade'}
           hidden={false}
+          backgroundColor={'#e6ffee'}
         />
-        <NavigationContainer>
+        <NavigationContainer
+          ref={navigationRef}
+          onStateChange={async () => {
+            const currentRouteName =
+              navigationRef.current.getCurrentRoute().name;
+            routeNameRef.current = currentRouteName;
+            setRouteName(navigationRef.getCurrentRoute().name as SCREEN_NAMES);
+          }}
+        >
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
@@ -45,4 +64,8 @@ export const App = () => {
 //   );
 // };
 // export default AppWrapper;
+
 export default App;
+
+// const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
+// const scrollViewRef = useRef<null | ScrollView>(null);
