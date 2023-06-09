@@ -27,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
       // example:
       // packages.add(new MyReactNativePackage());
       packages.add(new RNCConfigPackage());
+      packages.add(new VectorIconsPackage());
       return packages;
     }
 
