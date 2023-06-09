@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { AppDispatch, PredictMonkeyPox } from '@gp/redux';
+
+import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import PageHeader from '../../components/atoms/page-header';
 import Loader from '../../components/organisms/loader';
 
 const Prediction = ({ route, navigation }) => {
   const [loaderOpen, setLoaderOpen] = useState<boolean>(true);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    // dispatch(PredictMonkeyPox());
+    return;
+  }, [dispatch]);
 
   return (
     <>

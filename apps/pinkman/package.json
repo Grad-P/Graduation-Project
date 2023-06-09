@@ -20,6 +20,9 @@
     "@react-navigation/native-stack": "*",
     "react-native-paper": "*",
     "react-native-vector-icons": "*",
-    "lottie-react-native": "*"
+    "lottie-react-native": "*",
+    "@reduxjs/toolkit": "*",
+    "axios": "*",
+    "react-redux": "*"
   }
 }

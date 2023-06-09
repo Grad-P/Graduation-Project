@@ -107,8 +107,8 @@ const Treatment = ({ route, navigation }) => {
           <ScrollView
             style={{}}
             contentContainerStyle={{
-              gap: 20,
               flex: 1,
+              gap: 20,
               alignItems: 'center',
               justifyContent: 'center',
             }}
