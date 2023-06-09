@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
 export default function Symptoms() {
@@ -21,23 +22,29 @@ export default function Symptoms() {
     'sores in the mouth',
   ];
 
+
+  function checkTest (){
+    const [checkValue, setCheckValue] = useState( false)
+
+  }
   function showSymp() {
-    const symptoms = [];
-    for (let i = 0; i < symp.length; i++) {
-      symptoms.push(
-        <div className="d-flex col-md-6 bg-light m-auto text-secondary my-1">
-          <Form.Check aria-label="option 1" className="pe-2 pt-1" />
-          <p>{symp[i]}</p>
-        </div>
-      );
-    }
-    return symptoms;
+
+    // const symptoms = [];
+    // for (let i = 0; i < symp.length; i++) {
+    //   symptoms.push(
+
+    //   );
+    // }
+
+
+    // return symptoms;
   }
 
 
-<div style={{backgroundImage: "url(" + "../../assets/AdobeStock_2.jpeg" + ")",backgroundSize:'100% 100%',backgroundRepeat:'no-repeat'}} className='m-auto pt-2'>
-{showSymp()}
-</div>
+
+  return (<div style={{backgroundImage: "url(" + "../../assets/AdobeStock_2.jpeg" + ")",backgroundSize:'100% 100%',backgroundRepeat:'no-repeat'}} className='m-auto pt-2'>
+  {/* {showSymp()} */}
+  </div>)
 
 
 }

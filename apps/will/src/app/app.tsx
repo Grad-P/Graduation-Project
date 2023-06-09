@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.module.css'
 import { Route, Routes } from 'react-router-dom';
 import Home from '../components/Home/home';
 import NavBar from '../components/navBar/navBar';
@@ -7,6 +6,7 @@ import Prediction from '../components/Prediction/Prediction';
 import Prevention from '../components/Prevention/prevention';
 import Result from '../components/Result/Result';
 import Symptoms from '../components/Symptoms/symptoms';
+import './app.module.css';
 
 
 
@@ -22,15 +22,6 @@ export function App() {
           <Home />
           <Prevention />
         </div>} />
-      {/* <Route
-path="/prevention"
-element={
-  <div>
-    <Prevention />
-  </div>
-}
-/> */}
-
       <Route
         path="/symptoms"
         element={<div>
