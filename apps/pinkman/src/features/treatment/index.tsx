@@ -1,6 +1,6 @@
 import AnimatedLottieView from 'lottie-react-native';
 import { Fragment, useEffect, useState } from 'react';
-import { Pressable, SafeAreaView, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { SCREEN_NAMES } from '../../common';
 import PageHeader from '../../components/atoms/page-header';
 import Loader from '../../components/organisms/loader';
@@ -73,7 +73,10 @@ const Treatment = ({ route, navigation }) => {
     const arrayOfElements: JSX.Element[] = [];
     for (let index = 0; index < TreatmentScreens; index++) {
       arrayOfElements.push(
-        <View
+        <Pressable
+          onPress={() => {
+            setSelectedIndex(index);
+          }}
           key={index}
           style={{
             width: 10,
@@ -101,12 +104,13 @@ const Treatment = ({ route, navigation }) => {
       <PageHeader route={route} navigation={navigation} />
       <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
         {!loaderOpen && (
-          <View
-            style={{
+          <ScrollView
+            style={{}}
+            contentContainerStyle={{
+              gap: 20,
+              flex: 1,
               alignItems: 'center',
               justifyContent: 'center',
-              flex: 1,
-              gap: 20,
             }}
           >
             {renderTreatmentScreens()}
@@ -165,7 +169,7 @@ const Treatment = ({ route, navigation }) => {
               </Pressable>
             </View>
             <View style={{ flexDirection: 'row', gap: 6 }}>{renderDots()}</View>
-          </View>
+          </ScrollView>
         )}
         <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} />
       </SafeAreaView>
