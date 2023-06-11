@@ -1,14 +1,24 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "allowJs": false,
-    "esModuleInterop": false,
+    "lib": ["dom", "esnext","ES2021", "DOM"],
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "composite": true,
+    "declaration": true,
+    "allowJs": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "composite": true
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "isolatedModules": true,
+    "incremental": true,
+    "types": ["jest", "node"]
   },
   "files": [],
-  "include": ["./declaration.d.ts"] ,
+  "include": ["./declaration.d.ts","package.json"] ,
   "references": [
     {
       "path": "./tsconfig.app.json"
@@ -18,5 +28,5 @@
     }
   ],
   "extends": "../../tsconfig.base.json",
-
+  "exclude": ["node_modules"]
 }

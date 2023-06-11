@@ -3,7 +3,6 @@ import MIcon from 'react-native-vector-icons/Ionicons';
 import { SCREEN_NAMES } from '../../common';
 
 const PageHeader = ({ route, navigation }) => {
-  console.log('navigation', route);
   return (
     <View
       style={{

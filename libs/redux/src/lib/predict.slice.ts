@@ -33,6 +33,7 @@ const BACKEND_URL = 'http://localhost:3000/api/';
 export const PredictMonkeyPox = createAsyncThunk(
   'predict/PredictMonkeyPox',
   async (form: FormData, { getState }) => {
+    console.log('form', form);
     const response = await axios.post(BACKEND_URL + 'predict-monkeypox', form, {
       headers: {
         Accept: 'application/json',
@@ -46,7 +47,12 @@ export const PredictMonkeyPox = createAsyncThunk(
 export const PredictMonkeyPoxSlice = createSlice({
   name: 'PredictMonkeyPox',
   initialState,
-  reducers: {},
+  reducers: {
+    resetPrediction: (state) => {
+      console.log('refresh');
+      state = initialState;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -79,6 +85,8 @@ export const PredictMonkeyPoxSlice = createSlice({
       );
   },
 });
+
+export const { resetPrediction } = PredictMonkeyPoxSlice.actions;
 
 export const getPredictMonkeyPoxSliceDiseased = (state: RootState) =>
   state.PredictMonkeyPoxSlice.diseased;

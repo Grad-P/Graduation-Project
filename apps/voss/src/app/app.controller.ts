@@ -37,7 +37,13 @@ export class AppController {
   async predict(@UploadedFile() image: Express.Multer.File): Promise<any> {
     const imageBuffer = fs.readFileSync(image.path);
     const result = await this.mlService.predict(imageBuffer);
-    console.log('first', { result: (1 - result) * 100 });
-    return { result: (1 - result) * 100 };
+    let finalResult: boolean;
+    if ((1 - result) * 100 > 50) {
+      finalResult = true;
+    } else if ((1 - result) * 100 < 50) {
+      finalResult = false;
+    }
+    console.log('finalResult', finalResult);
+    return { result: finalResult };
   }
 }
