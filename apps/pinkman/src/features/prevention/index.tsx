@@ -1,8 +1,9 @@
 import AnimatedLottieView from 'lottie-react-native';
 import { Fragment, useEffect, useState } from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { SCREEN_NAMES } from '../../common';
 import PageHeader from '../../components/atoms/page-header';
+import Loader from '../../components/organisms/loader';
 
 const Prevention = ({ route, navigation }) => {
   const [loaderOpen, setLoaderOpen] = useState<boolean>(true);
@@ -211,9 +212,9 @@ const Prevention = ({ route, navigation }) => {
   }, [navigation]);
   return (
     <>
-      {loaderOpen && (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-          <PageHeader route={route} navigation={navigation} />
+      <PageHeader route={route} navigation={navigation} />
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        {!loaderOpen && (
           <ScrollView
             style={{
               flex: 1,
@@ -282,9 +283,9 @@ const Prevention = ({ route, navigation }) => {
             </View>
             <View style={{ flexDirection: 'row', gap: 6 }}>{renderDots()}</View>
           </ScrollView>
-        </View>
-      )}
-      {/* <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} /> */}
+        )}
+        <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} />
+      </SafeAreaView>
     </>
   );
 };

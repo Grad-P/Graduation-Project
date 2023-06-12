@@ -8,14 +8,16 @@ import {
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 
 import { useEffect, useState } from 'react';
-import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, Text } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import GalleryUpload from '../../assets/icons/upload.from.galery.svg';
 import PageHeader from '../../components/atoms/page-header';
 import Loader from '../../components/organisms/loader';
+import PredictionResult from '../../components/organisms/result';
 const Prediction = ({ route, navigation }) => {
   const [loaderOpen, setLoaderOpen] = useState<boolean>(true);
+  const [showResult, setShowResult] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [imageType, setImageType] = useState<string>('');
 
@@ -26,10 +28,15 @@ const Prediction = ({ route, navigation }) => {
 
   useEffect(() => {
     if (predictionStatus === SliceStatus.SUCCEEDED) {
-      alert(prediction);
+      setLoaderOpen(false);
+      setShowResult(true);
+    }
+    if (predictionStatus === SliceStatus.LOADING) {
+      setLoaderOpen(true);
     }
     return;
-  }, [prediction, predictionStatus]);
+  }, [predictionStatus]);
+
   useEffect(() => {
     if (selectedImage !== '') {
       const form = new FormData();
@@ -38,7 +45,6 @@ const Prediction = ({ route, navigation }) => {
         uri: selectedImage,
         type: imageType,
       } as any);
-
       dispatch(PredictMonkeyPox(form));
       return;
     }
@@ -46,8 +52,8 @@ const Prediction = ({ route, navigation }) => {
 
   return (
     <>
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <PageHeader route={route} navigation={navigation} />
+      <PageHeader route={route} navigation={navigation} />
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
         {!loaderOpen && (
           <SafeAreaView style={{ flex: 1, backgroundColor: '#f7fff9' }}>
             <ScrollView
@@ -135,8 +141,14 @@ const Prediction = ({ route, navigation }) => {
             </ScrollView>
           </SafeAreaView>
         )}
-      </View>
-      <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} />
+        <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} />
+      </SafeAreaView>
+      <PredictionResult
+        visible={showResult}
+        setVisible={setShowResult}
+        diseased={prediction}
+        navigation={navigation}
+      />
     </>
   );
 };

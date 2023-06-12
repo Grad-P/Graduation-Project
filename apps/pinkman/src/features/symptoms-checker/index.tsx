@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SCREEN_NAMES } from '../../common';
-import ProbabilityScreen from './probability';
 import QuestionsScreen from './questions';
 
 const Stack = createNativeStackNavigator();
@@ -13,11 +12,6 @@ const SymptomsChecker = () => {
       }}
       initialRouteName={SCREEN_NAMES.QUESTIONS}
     >
-      <Stack.Screen
-        name={SCREEN_NAMES.PROBABILITY}
-        component={ProbabilityScreen}
-      />
-
       <Stack.Screen name={SCREEN_NAMES.QUESTIONS} component={QuestionsScreen} />
     </Stack.Navigator>
   );

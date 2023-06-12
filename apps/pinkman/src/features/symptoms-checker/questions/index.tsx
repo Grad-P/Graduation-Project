@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import PageHeader from '../../../components/atoms/page-header';
+import Loader from '../../../components/organisms/loader';
 import SymptomsCheckerResult from './questions.result/questions.result';
 
 const QuestionsScreen = ({ route, navigation }) => {
@@ -28,6 +29,7 @@ const QuestionsScreen = ({ route, navigation }) => {
     new Array(symptoms.length).fill(false)
   );
   const [total, setTotal] = useState(0);
+  const [loaderOpen, setLoaderOpen] = useState<boolean>(true);
 
   const [showResult, setShowResult] = useState<boolean>(false);
   const [diseased, setDiseased] = useState<boolean>(false);
@@ -72,80 +74,86 @@ const QuestionsScreen = ({ route, navigation }) => {
     <>
       <PageHeader route={route} navigation={navigation} />
       <SafeAreaView style={{ backgroundColor: '#f7fff9', flex: 1 }}>
-        <Text style={{ fontSize: 18, padding: 12, paddingHorizontal: 16 }}>
-          Check Your Symptoms about being diseased by monkeypox
-        </Text>
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ paddingVertical: 12 }}
-        >
-          {symptoms.map((ele, index) => {
-            return (
-              <View
-                style={{
-                  paddingHorizontal: 16,
-                  paddingVertical: 5,
-                  flex: 1,
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
-                >
+        {!loaderOpen && (
+          <>
+            <Text style={{ fontSize: 18, padding: 12, paddingHorizontal: 16 }}>
+              Check Your Symptoms about being diseased by monkeypox
+            </Text>
+            <ScrollView
+              style={{ flex: 1 }}
+              contentContainerStyle={{ paddingVertical: 12 }}
+            >
+              {symptoms.map((ele, index) => {
+                return (
                   <View
+                    key={index}
                     style={{
-                      borderWidth: 1,
-                      borderColor: 'black',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      margin: 2,
-                      borderRadius: 50,
-                      marginHorizontal: 4,
+                      paddingHorizontal: 16,
+                      paddingVertical: 5,
+                      flex: 1,
                     }}
                   >
-                    <Checkbox
-                      status={checkedState[index] ? 'checked' : 'unchecked'}
-                      onPress={() => {
-                        handleOnChange(index);
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
                       }}
-                      color="green"
-                    />
+                    >
+                      <View
+                        style={{
+                          borderWidth: 1,
+                          borderColor: 'black',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          margin: 2,
+                          borderRadius: 50,
+                          marginHorizontal: 4,
+                        }}
+                      >
+                        <Checkbox
+                          status={checkedState[index] ? 'checked' : 'unchecked'}
+                          onPress={() => {
+                            handleOnChange(index);
+                          }}
+                          color="green"
+                        />
+                      </View>
+                      <Text style={{ textAlignVertical: 'center' }}>{ele}</Text>
+                    </View>
                   </View>
-                  <Text style={{ textAlignVertical: 'center' }}>{ele}</Text>
-                </View>
-              </View>
-            );
-          })}
-        </ScrollView>
-        <Pressable
-          onPress={onSubmit}
-          style={{
-            backgroundColor: total ? 'green' : 'gray',
-            padding: 16,
-            margin: 16,
-            borderRadius: 10,
-            alignItems: 'center',
-          }}
-        >
-          <Text
-            style={{
-              textAlignVertical: 'center',
-              color: 'white',
-              fontWeight: '600',
-            }}
-          >
-            Let's Start
-          </Text>
-        </Pressable>
+                );
+              })}
+            </ScrollView>
+            <Pressable
+              onPress={onSubmit}
+              style={{
+                backgroundColor: total ? 'green' : 'gray',
+                padding: 16,
+                margin: 16,
+                borderRadius: 10,
+                alignItems: 'center',
+              }}
+            >
+              <Text
+                style={{
+                  textAlignVertical: 'center',
+                  color: 'white',
+                  fontWeight: '600',
+                }}
+              >
+                Let's Start
+              </Text>
+            </Pressable>
 
-        <SymptomsCheckerResult
-          navigation={navigation}
-          visible={showResult}
-          setVisible={setShowResult}
-          diseased={diseased}
-        />
+            <SymptomsCheckerResult
+              navigation={navigation}
+              visible={showResult}
+              setVisible={setShowResult}
+              diseased={diseased}
+            />
+          </>
+        )}
+        <Loader setLoaderOpen={setLoaderOpen} loaderOpen={loaderOpen} />
       </SafeAreaView>
     </>
   );

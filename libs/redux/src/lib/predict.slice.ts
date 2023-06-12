@@ -49,8 +49,7 @@ export const PredictMonkeyPoxSlice = createSlice({
   initialState,
   reducers: {
     resetPrediction: (state) => {
-      console.log('refresh');
-      state = initialState;
+      state.predictMonkeyPoxSliceStatus = SliceStatus.IDLE;
     },
   },
   extraReducers: (builder) => {
